@@ -17,7 +17,7 @@ public class LinkedListTest {
         System.out.println("Print list from tail: ");
         myList.PrintListTail();
         System.out.println("Get 3rd element: " + myList.getElement(3).getData());
-        System.out.println("Delete 2nd element: " + myList.deleteElement(2).getData());
+        System.out.println("Delete 3nd element: " + myList.deleteElement(3).getData());
         System.out.println("Get 3rd element: " + myList.getElement(3).getData());
         System.out.println("Print list from head: ");
         myList.PrintListHead();
@@ -53,21 +53,21 @@ class LinkedList {
 		}
 
 		temp.setPrev(currPtr);		//connect temp's prev as currPtr
-		temp.setNext(tail);			//connect temp's next as tail
+		temp.setNext(tail);		//connect temp's next as tail
 		currPtr.setNext(temp);		//connect currPtr's next as temp
-		tail.setPrev(temp);			//connect tail's prev as temp
+		tail.setPrev(temp);		//connect tail's prev as temp
 
-		numList++;					//increase number of list elements
+		numList++;			//increase number of list elements
 	}
 
 	public ListElement getElement(int index) {
 		if (index <= 0)
-			return null;			//index must be larger than 0
+			return null;		//index must be larger than 0
 		currPtr = head.getNext();	//start at beginning
 		//
 		for (int i=1; i<=index; i++) {
 			if (currPtr.getNext() == tail) {
-				return null;		//return null if index is higher than numList
+				return null;	//return null if index is higher than numList
 			}
 			//inc currPtr unless index is beyond scope of linked list
 			currPtr = currPtr.getNext();
@@ -78,11 +78,11 @@ class LinkedList {
 	public ListElement deleteElement(int index) {
 		ListElement del = new ListElement();
 		if (index <=0)
-			return null;			//index must be larger than 0
-		currPtr = head; 	//start just before beginning
+			return null;		//index must be larger than 0
+		currPtr = head; 		//start just before beginning
 		for (int i=1; i<=index; i++) {
 			if (currPtr.getNext() == tail) {
-				return null;		//return null if index>numList
+				return null;	//return null if index>numList
 			}
 			//inc currPtr unless index is > than numList
 			prevPtr = currPtr;
@@ -93,8 +93,6 @@ class LinkedList {
 		//link the nodes on either side of deleted node
 		currPtr.setNext(temp);
 		temp.setPrev(currPtr);
-
-		numList--;					//dec number of list elements
 		return del;
 	}
 
@@ -117,7 +115,7 @@ class LinkedList {
 			currPtr = currPtr.getPrev();
 		}
 
-		//display list on console
+	//display list on console
         System.out.println("Linked List: " + list);
 	}
 }
