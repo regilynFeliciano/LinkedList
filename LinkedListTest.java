@@ -32,7 +32,6 @@ class LinkedList {
 	private ListElement currPtr;
 	private ListElement prevPtr;
 	private ListElement temp;
-	private int numList;
 
 	//constructor for empty linked list
 	public LinkedList() {
@@ -40,7 +39,6 @@ class LinkedList {
 		tail = new ListElement();
 		head.setNext(tail);
 		tail.setPrev(head);
-		numList = 0;
 	}
 
 	//method to insert an element into list
@@ -56,8 +54,6 @@ class LinkedList {
 		temp.setNext(tail);		//connect temp's next as tail
 		currPtr.setNext(temp);		//connect currPtr's next as temp
 		tail.setPrev(temp);		//connect tail's prev as temp
-
-		numList++;			//increase number of list elements
 	}
 
 	public ListElement getElement(int index) {
