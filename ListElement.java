@@ -38,4 +38,4 @@ public class ListElement {
 	public ListElement getPrev() {
 		return this.prev;
 	}
-}# LinkedList
+}
