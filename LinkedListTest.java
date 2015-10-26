@@ -26,12 +26,10 @@ class LinkedList {
 	private ListElement head;
 	private ListElement currPtr;
 	private ListElement temp;
-	private int numList;
 
 	//constructor for empty linked list
 	public LinkedList() {
 		head = new ListElement();
-		numList = 0;
 	}
 
 	//method to insert an element into list
