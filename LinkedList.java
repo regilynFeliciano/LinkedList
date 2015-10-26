@@ -4,7 +4,7 @@ public class LinkedList {
 	private ListElement head;
 	private ListElement currPtr;
 	private ListElement temp;
-	private int numList;
+	private int numList;	//never actually used it
 
 	//constructor for empty linked list
 	public LinkedList() {
@@ -17,10 +17,15 @@ public class LinkedList {
 		temp = new ListElement(le);
 		currPtr = head;
 		//move currPtr to end of linked list and insert there
-		while (currPtr.getNext() != null) {
+		while (currPtr.getNext() != tail) {
 			currPtr = currPtr.getNext();
 		}
-		currPtr.setNext(temp);		//append new list element at end
+
+		temp.setPrev(currPtr);		//connect temp's prev as currPtr
+		temp.setNext(tail);			//connect temp's next as tail
+		currPtr.setNext(temp);		//connect currPtr's next as temp
+		tail.setPrev(temp);			//connect tail's prev as temp
+
 		numList++;					//increase number of list elements
 	}
 
@@ -40,33 +45,50 @@ public class LinkedList {
 	}
 
 	public ListElement deleteElement(int index) {
-		//ListElement del = new ListElement(null);
+		ListElement del = new ListElement();
 		if (index <=0)
 			return null;			//index must be larger than 0
 		currPtr = head; 	//start just before beginning
 		for (int i=1; i<=index; i++) {
-			if (currPtr.getNext() == null) {
+			if (currPtr.getNext() == tail) {
 				return null;		//return null if index>numList
 			}
 			//inc currPtr unless index is > than numList
+			prevPtr = currPtr;
 			currPtr = currPtr.getNext();
 		}
-		temp = currPtr.getNext();	//store deleting value to temp
+		del = currPtr.getNext();	//store deleting value to temp
+		temp = currPtr.getNext().getNext();
 		//link the nodes on either side of deleted node
-		currPtr.setNext(currPtr.getNext().getNext());
+		currPtr.setNext(temp);
+		temp.setPrev(currPtr);
+
 		numList--;					//dec number of list elements
-		return temp;
+		return del;
 	}
 
-	public void PrintList() {
+
+	public void PrintListHead() {
 		currPtr = head.getNext();	//start at beginning of list
 		String list = "";
-		while (currPtr != null) {
+		while (currPtr != tail) {
 			list += currPtr.getData() + " ";
 			currPtr = currPtr.getNext();
 		}
 		//display list on console
-      System.out.println("Linked List: " + list);
+        	System.out.println("Linked List: " + list);
+	}
+
+	public void PrintListTail() {
+		currPtr = tail.getPrev();	//start at end of list
+		String list = "";
+		while (currPtr != head) {
+			list += currPtr.getData() + " ";
+			currPtr = currPtr.getPrev();
+		}
+
+		//display list on console
+                System.out.println("Linked List: " + list);
 	}
 }
 
@@ -82,18 +104,16 @@ public class LinkedListTest {
         myList.addElement(4);
         myList.addElement(5);
  
-        /*
-         * Please note that primitive values can not be added into LinkedList
-         * directly. They must be converted to their corresponding wrapper
-         * class.
-         */
- 
-        System.out.println("Print list: ");
-        myList.PrintList();
-        System.out.println("Get 3rd element: " + myList.getElement(3));
-        System.out.println("Delete 2nd element: " + myList.deleteElement(2));
-        System.out.println("Get 3rd element: " + myList.getElement(3));
-        System.out.println("Print list: ");
-        myList.PrintList();
+        System.out.println("Print list from head: ");
+        myList.PrintListHead();
+        System.out.println("Print list from tail: ");
+        myList.PrintListTail();
+        System.out.println("Get 3rd element: " + myList.getElement(3).getData());
+        System.out.println("Delete 2nd element: " + myList.deleteElement(2).getData());
+        System.out.println("Get 3rd element: " + myList.getElement(3).getData());
+        System.out.println("Print list from head: ");
+        myList.PrintListHead();
+        System.out.println("Print list from tail: ");
+        myList.PrintListTail();
     }
 }
