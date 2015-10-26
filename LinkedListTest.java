@@ -15,7 +15,7 @@ public class LinkedListTest {
         System.out.println("Print list: ");
         myList.PrintList();
         System.out.println("Get 3rd element: " + myList.getElement(3).getData());
-        System.out.println("Delete 2nd element: " + myList.deleteElement(2).getData());
+        System.out.println("Delete 3nd element: " + myList.deleteElement(3).getData());
         System.out.println("Get 3rd element: " + myList.getElement(3).getData());
         System.out.println("Print list: ");
         myList.PrintList();
@@ -42,14 +42,13 @@ class LinkedList {
 		while (currPtr.getNext() != null) {
 			currPtr = currPtr.getNext();
 		}
-		currPtr.setNext(temp);		//append new list element at end
-		numList++;					//increase number of list elements
+		currPtr.setNext(temp);			//append new list element at end
 	}
 
 	public ListElement getElement(int index) {
 		if (index <= 0)
 			return null;			//index must be larger than 0
-		currPtr = head.getNext();	//start at beginning
+		currPtr = head.getNext();		//start at beginning
 		//
 		for (int i=1; i<=index; i++) {
 			if (currPtr.getNext() == null) {
@@ -65,7 +64,7 @@ class LinkedList {
 		//ListElement del = new ListElement(null);
 		if (index <=0)
 			return null;			//index must be larger than 0
-		currPtr = head; 	//start just before beginning
+		currPtr = head; 			//start just before beginning
 		for (int i=1; i<=index; i++) {
 			if (currPtr.getNext() == null) {
 				return null;		//return null if index>numList
@@ -76,7 +75,6 @@ class LinkedList {
 		temp = currPtr.getNext();	//store deleting value to temp
 		//link the nodes on either side of deleted node
 		currPtr.setNext(currPtr.getNext().getNext());
-		numList--;					//dec number of list elements
 		return temp;
 	}
 
@@ -87,7 +85,7 @@ class LinkedList {
 			list += currPtr.getData() + " ";
 			currPtr = currPtr.getNext();
 		}
-		//display list on console
-      System.out.println("Linked List: " + list);
+	//display list on console
+        System.out.println("Linked List: " + list);
 	}
 }
