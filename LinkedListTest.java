@@ -11,13 +11,7 @@ public class LinkedListTest {
         myList.addElement(7);
         myList.addElement(3);
         myList.addElement(2);
- 
-        /*
-         * Please note that primitive values can not be added into LinkedList
-         * directly. They must be converted to their corresponding wrapper
-         * class.
-         */
- 
+        
         System.out.println("Print list from head: ");
         myList.PrintListHead();
         System.out.println("Print list from tail: ");
